@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/users');
 
 dotenv.config();
 
@@ -15,9 +15,10 @@ app.use(express.json());
 
 //Connect to MongoDB
 
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParer: true,
-    useUnifiedTopology: true
+mongoose.connect("mongodb://localhost:27017/test", {
+
+    maxPoolSize: 50,
+    wtimeoutMS: 2500,
 })
     .then(() => console.log("Connected to MongoDB"))
     .catch(err => console.log("Failed to connect MongoDB", err));
